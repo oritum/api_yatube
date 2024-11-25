@@ -6,7 +6,7 @@ class TestAuthAPI:
     def test_auth(self, client, user, password):
         response = client.post(
             '/api/v1/api-token-auth/',
-            data={'username': user.username, 'password': password}
+            data={'username': user.username, 'password': password},
         )
         assert response.status_code != HTTPStatus.NOT_FOUND, (
             'Страница `/api/v1/api-token-auth/` не найдена, проверьте этот '
