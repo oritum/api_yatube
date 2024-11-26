@@ -1,6 +1,7 @@
 """Кастомные permissions для api_yatube."""
 
 from rest_framework.permissions import SAFE_METHODS, BasePermission
+from rest_framework.exceptions import PermissionDenied
 
 
 class IsAuthentificatedAndAuthorPermission(BasePermission):
@@ -16,4 +17,6 @@ class IsAuthentificatedAndAuthorPermission(BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method in SAFE_METHODS:
             return True
+        if obj.author != request.user:
+            raise PermissionDenied('Изменение чужого контента запрещено!')
         return obj.author == request.user
