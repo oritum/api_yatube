@@ -1,4 +1,3 @@
-
 # Проект api_yatube
 
 ## Описание проекта
@@ -14,16 +13,20 @@
 #### Шаг 1: Клонирование репозитория
 
 ```bash
-git clone https://github.com/yourusername/api_yatube.git
-cd api_yatube
+git clone git@github.com:<username>/api_yatube.git
 ```
 
+```bash
+cd api_yatube
+```
 
 #### Шаг 2: Создание и активация виртуального окружения
 
 ```bash
 python3 -m venv venv
+```
 
+```bash
 source venv/bin/activate
 ```
 
@@ -31,7 +34,9 @@ source venv/bin/activate
 
 ```bash
 python3 -m pip install --upgrade pip
+```
 
+```bash
 pip install -r requirements.txt
 ```
 
