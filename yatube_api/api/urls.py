@@ -1,7 +1,7 @@
+from api.views import CommentViewSet, GroupViewSet, PostViewSet
 from django.urls import include, path
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
-from api.views import PostViewSet, GroupViewSet, CommentViewSet
 
 app_name = 'api'
 

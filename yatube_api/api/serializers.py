@@ -3,7 +3,8 @@ from rest_framework.serializers import ModelSerializer, ReadOnlyField
 
 
 class PostSerializer(ModelSerializer):
-    author = ReadOnlyField(source='author.username')
+    """Сериализатор для модели Post."""
+    author: ReadOnlyField = ReadOnlyField(source='author.username')
 
     class Meta:
         model = Post
@@ -11,8 +12,9 @@ class PostSerializer(ModelSerializer):
 
 
 class CommentSerializer(ModelSerializer):
-    author = ReadOnlyField(source='author.username')
-    post = ReadOnlyField(source='post_id')
+    """Сериализатор для модели Comment."""
+    author: ReadOnlyField = ReadOnlyField(source='author.username')
+    post: ReadOnlyField = ReadOnlyField(source='post.id')
 
     class Meta:
         model = Comment
@@ -20,6 +22,7 @@ class CommentSerializer(ModelSerializer):
 
 
 class GroupSerializer(ModelSerializer):
+    """Сериализатор для модели Group."""
     class Meta:
         model = Group
         fields = ('id', 'title', 'slug', 'description')
