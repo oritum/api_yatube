@@ -19,4 +19,4 @@ class IsAuthentificatedAndAuthorPermission(BasePermission):
             return True
         if obj.author != request.user:
             raise PermissionDenied('Изменение чужого контента запрещено!')
-        return obj.author == request.user
+        return True
