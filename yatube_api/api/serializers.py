@@ -1,20 +1,23 @@
+from rest_framework.serializers import ModelSerializer, SlugRelatedField
+
 from posts.models import Comment, Group, Post
-from rest_framework.serializers import ModelSerializer, ReadOnlyField
 
 
-class PostSerializer(ModelSerializer):
+class AuthorBaseSerializer(ModelSerializer):
+    """Базовый сериализатор для моделей Post и Comment."""
+    author = SlugRelatedField(read_only=True, slug_field='username')
+
+
+class PostSerializer(AuthorBaseSerializer):
     """Сериализатор для модели Post."""
-    author: ReadOnlyField = ReadOnlyField(source='author.username')
-
     class Meta:
         model = Post
         fields = ('id', 'text', 'author', 'image', 'group', 'pub_date')
 
 
-class CommentSerializer(ModelSerializer):
+class CommentSerializer(AuthorBaseSerializer):
     """Сериализатор для модели Comment."""
-    author: ReadOnlyField = ReadOnlyField(source='author.username')
-    post: ReadOnlyField = ReadOnlyField(source='post.id')
+    post = SlugRelatedField(read_only=True, slug_field='id')
 
     class Meta:
         model = Comment
