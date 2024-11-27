@@ -1,18 +1,24 @@
 from typing import Any
 
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.serializers import Serializer
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
-from api.permissions import IsAuthentificatedAndAuthorPermission
+from api.permissions import IsAuthorOrReadOnly
 from api.serializers import CommentSerializer, GroupSerializer, PostSerializer
 from posts.models import Comment, Group, Post
 
 
 class PermissionMixin(ModelViewSet):
-    """Миксин для проверки прав пользвателей."""
+    """
+    Миксин для проверки прав пользвателей:
+    - автор: редактирование и удаление;
+    - аутентифицированный пользователь: только чтение;
+    - неаутентифицированный пользователь: доступ запрещён.
+    """
 
-    permission_classes = [IsAuthentificatedAndAuthorPermission]
+    permission_classes = [IsAuthorOrReadOnly, IsAuthenticated]
 
 
 class PostViewSet(PermissionMixin):
